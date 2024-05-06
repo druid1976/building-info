@@ -2,7 +2,12 @@
 
 For building administrators who want to minimise the costs of building management, our Building Info application will enable obtaining information about building parameters at the level of rooms, floors and entire buildings. The application will be available via GUI and also as a remote API, thanks to which it can be integrated with existing tools. 
 
-
+---
+## Our Team
+1. Eren Kaan Oral
+2. Alp Çağan İlhan
+3. Batıkan Çiftçi
+4. Yusuf Gökalp Kutlu
 
 ## Data structure
 1. A location is a building, level, or room
