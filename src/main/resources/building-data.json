@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "name": "Building A",
+    "levels": [
+      {
+        "id": "1",
+        "name": "Ground Floor",
+        "rooms": [
+          {
+            "id": "101",
+            "name": "Room 101",
+            "area": 50.0,
+            "cube": 100.0,
+            "heating": 30.0,
+            "light": 500.0
+          },
+          {
+            "id": "102",
+            "name": "Room 102",
+            "area": 60.0,
+            "cube": 120.0,
+            "heating": 35.0,
+            "light": 550.0
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "First Floor",
+        "rooms": [
+          {
+            "id": "201",
+            "name": "Room 201",
+            "area": 55.0,
+            "cube": 110.0,
+            "heating": 32.0,
+            "light": 520.0
+          },
+          {
+            "id": "202",
+            "name": "Room 202",
+            "area": 65.0,
+            "cube": 130.0,
+            "heating": 38.0,
+            "light": 570.0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Building B",
+    "levels": [
+      {
+        "id": "1",
+        "name": "Ground Floor",
+        "rooms": [
+          {
+            "id": "101",
+            "name": "Room 101",
+            "area": 55.0,
+            "cube": 120.0,
+            "heating": 28.0,
+            "light": 480.0
+          },
+          {
+            "id": "102",
+            "name": "Room 102",
+            "area": 65.0,
+            "cube": 140.0,
+            "heating": 32.0,
+            "light": 540.0
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "First Floor",
+        "rooms": [
+          {
+            "id": "201",
+            "name": "Room 201",
+            "area": 60.0,
+            "cube": 130.0,
+            "heating": 30.0,
+            "light": 510.0
+          },
+          {
+            "id": "202",
+            "name": "Room 202",
+            "area": 70.0,
+            "cube": 150.0,
+            "heating": 35.0,
+            "light": 580.0
+          }
+        ]
+      }
+    ]
+  }
+]
