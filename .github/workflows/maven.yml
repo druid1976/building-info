@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +19,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn --batch-mode --update-snapshots verify
+      run: mvn --batch-mode --update-snapshots package
 
+    - name: Upload Artifact
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-app
+        path: target/*.jar
 
-    # Send email notification in case of failed build
     - name: Send email notification on failure
       if: failure()
       uses: dawidd6/action-send-mail@v2
