@@ -7,93 +7,144 @@ import pl.put.poznan.transformer.api.model.Level;
 import pl.put.poznan.transformer.api.model.Room;
 import pl.put.poznan.transformer.api.model.ValueInfo;
 import pl.put.poznan.transformer.api.service.BuildingService;
-
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 public class BuildingController {
+    private static final Logger logger = LoggerFactory.getLogger(BuildingController.class);
 
     @Autowired
     private BuildingService buildingService;
 
     @GetMapping("/buildings")
     public List<Building> getAllBuildings() {
-        return buildingService.getAllBuildings();
+        logger.info("Received request to get all buildings");
+        List<Building> buildings = buildingService.getAllBuildings();
+        logger.debug("Returning buildings: {}", buildings);
+        return buildings;
     }
 
     @GetMapping("/buildings/{buildingId}")
     public Building getBuildingById(@PathVariable String buildingId) {
-        return buildingService.getBuildingById(buildingId);
+        logger.info("Received request to get building with ID: {}", buildingId);
+        Building building = buildingService.getBuildingById(buildingId);
+        logger.debug("Returning building: {}", building);
+        return building;
     }
 
     @GetMapping("/buildings/{buildingId}/levels/{levelId}")
     public Level getLevelById(@PathVariable String buildingId, @PathVariable String levelId) {
-        return buildingService.getLevelById(buildingId, levelId);
+        logger.info("Received request to get level with ID: {} from building with ID: {}", levelId, buildingId);
+        Level level = buildingService.getLevelById(buildingId, levelId);
+        logger.debug("Returning level: {}", level);
+        return level;
     }
 
     @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}")
     public Room getRoomById(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
-        return buildingService.getRoomById(buildingId, levelId, roomId);
+        logger.info("Received request to get room with ID: {} from level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        Room room = buildingService.getRoomById(buildingId, levelId, roomId);
+        logger.debug("Returning room: {}", room);
+        return room;
     }
 
-    @GetMapping("/buildings/{buildingId}/total-area")
+    @GetMapping("/buildings/{buildingId}/area")
     public ValueInfo getTotalAreaOfBuilding(@PathVariable String buildingId) {
-        return buildingService.getTotalAreaOfBuilding(buildingId);
+        logger.info("Received request to get total area of building with ID: {}", buildingId);
+        ValueInfo area = buildingService.getTotalAreaOfBuilding(buildingId);
+        logger.debug("Returning total area of building: {}", area);
+        return area;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/total-area")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/area")
     public ValueInfo getTotalAreaOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
-        return buildingService.getTotalAreaOfLevel(buildingId, levelId);
+        logger.info("Received request to get total area of level with ID: {} in building with ID: {}", levelId, buildingId);
+        ValueInfo area = buildingService.getTotalAreaOfLevel(buildingId, levelId);
+        logger.debug("Returning total area of level: {}", area);
+        return area;
     }
 
     @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/area")
     public ValueInfo getAreaOfRoom(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
-        return buildingService.getAreaOfRoom(buildingId, levelId, roomId);
+        logger.info("Received request to get area of room with ID: {} in level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        ValueInfo area = buildingService.getAreaOfRoom(buildingId, levelId, roomId);
+        logger.debug("Returning area of room: {}", area);
+        return area;
     }
 
-    @GetMapping("/buildings/{buildingId}/total-volume")
+    @GetMapping("/buildings/{buildingId}/volume")
     public ValueInfo getTotalVolumeOfBuilding(@PathVariable String buildingId) {
-        return buildingService.getTotalVolumeOfBuilding(buildingId);
+        logger.info("Received request to get total volume of building with ID: {}", buildingId);
+        ValueInfo volume = buildingService.getTotalVolumeOfBuilding(buildingId);
+        logger.debug("Returning total volume of building: {}", volume);
+        return volume;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/total-volume")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/volume")
     public ValueInfo getTotalVolumeOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
-        return buildingService.getTotalVolumeOfLevel(buildingId, levelId);
+        logger.info("Received request to get total volume of level with ID: {} in building with ID: {}", levelId, buildingId);
+        ValueInfo volume = buildingService.getTotalVolumeOfLevel(buildingId, levelId);
+        logger.debug("Returning total volume of level: {}", volume);
+        return volume;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/total-volume")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/volume")
     public ValueInfo getVolumeOfRoom(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
-        return buildingService.getVolumeOfRoom(buildingId, levelId, roomId);
+        logger.info("Received request to get volume of room with ID: {} in level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        ValueInfo volume = buildingService.getVolumeOfRoom(buildingId, levelId, roomId);
+        logger.debug("Returning volume of room: {}", volume);
+        return volume;
     }
 
-    @GetMapping("/buildings/{buildingId}/lighting-power-per-unit-area")
-    public ValueInfo getLightingPowerPerUnitAreaOfBuilding(@PathVariable String buildingId) {
-        return buildingService.getAverageLightingPowerPerUnitAreaOfBuilding(buildingId);
+    @GetMapping("/buildings/{buildingId}/lighting")
+    public ValueInfo getAverageLightingPowerPerUnitAreaOfBuilding(@PathVariable String buildingId) {
+        logger.info("Received request to get average lighting power per unit area of building with ID: {}", buildingId);
+        ValueInfo lighting = buildingService.getAverageLightingPowerPerUnitAreaOfBuilding(buildingId);
+        logger.debug("Returning average lighting power per unit area of building: {}", lighting);
+        return lighting;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/lighting-power-per-unit-area")
-    public ValueInfo getLightingPowerPerUnitAreaOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
-        return buildingService.getAverageLightingPowerPerUnitAreaOfLevel(buildingId, levelId);
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/lighting")
+    public ValueInfo getAverageLightingPowerPerUnitAreaOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
+        logger.info("Received request to get average lighting power per unit area of level with ID: {} in building with ID: {}", levelId, buildingId);
+        ValueInfo lighting = buildingService.getAverageLightingPowerPerUnitAreaOfLevel(buildingId, levelId);
+        logger.debug("Returning average lighting power per unit area of level: {}", lighting);
+        return lighting;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/lighting-power-per-unit-area")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/lighting")
     public ValueInfo getLightingPowerPerUnitAreaOfRoom(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
-        return buildingService.getLightingPowerPerUnitAreaOfRoom(buildingId, levelId, roomId);
+        logger.info("Received request to get lighting power per unit area of room with ID: {} in level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        ValueInfo lighting = buildingService.getLightingPowerPerUnitAreaOfRoom(buildingId, levelId, roomId);
+        logger.debug("Returning lighting power per unit area of room: {}", lighting);
+        return lighting;
     }
 
-    @GetMapping("/buildings/{buildingId}/heating-energy-consumption-per-unit-volume")
+    @GetMapping("/buildings/{buildingId}/heating")
     public ValueInfo getAverageHeatingEnergyConsumptionPerUnitVolumeOfBuilding(@PathVariable String buildingId) {
-        return buildingService.getAverageHeatingEnergyConsumptionPerUnitVolumeOfBuilding(buildingId);
+        logger.info("Received request to get average heating energy consumption per unit volume of building with ID: {}", buildingId);
+        ValueInfo heating = buildingService.getAverageHeatingEnergyConsumptionPerUnitVolumeOfBuilding(buildingId);
+        logger.debug("Returning average heating energy consumption per unit volume of building: {}", heating);
+        return heating;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/heating-energy-consumption-per-unit-volume")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/heating")
     public ValueInfo getAverageHeatingEnergyConsumptionPerUnitVolumeOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
-        return buildingService.getAverageHeatingEnergyConsumptionPerUnitVolumeOfLevel(buildingId, levelId);
+        logger.info("Received request to get average heating energy consumption per unit volume of level with ID: {} in building with ID: {}", levelId, buildingId);
+        ValueInfo heating = buildingService.getAverageHeatingEnergyConsumptionPerUnitVolumeOfLevel(buildingId, levelId);
+        logger.debug("Returning average heating energy consumption per unit volume of level: {}", heating);
+        return heating;
     }
 
-    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/heating-energy-consumption-per-unit-volume")
+    @GetMapping("/buildings/{buildingId}/levels/{levelId}/rooms/{roomId}/heating")
     public ValueInfo getHeatingEnergyConsumptionPerUnitVolumeOfRoom(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
-        return buildingService.getHeatingEnergyConsumptionPerUnitVolumeOfRoom(buildingId, levelId, roomId);
+        logger.info("Received request to get heating energy consumption per unit volume of room with ID: {} in level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        ValueInfo heating = buildingService.getHeatingEnergyConsumptionPerUnitVolumeOfRoom(buildingId, levelId, roomId);
+        logger.debug("Returning heating energy consumption per unit volume of room: {}", heating);
+        return heating;
     }
 
     @GetMapping("/buildings/{buildingId}/rooms-exceeding-heat-limit")

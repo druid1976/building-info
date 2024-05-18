@@ -6,17 +6,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="building-info" />
         <module name="io-project-architecture" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ioprojectarchitecture" target="11" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="building-info" options="-parameters" />
+      <module name="buildinginfo" options="-parameters" />
       <module name="io-project-architecture" options="-parameters" />
-      <module name="ioprojectarchitecture" options="-parameters" />
     </option>
   </component>
 </project>
