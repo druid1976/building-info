@@ -1,3 +1,11 @@
-pl\put\poznan\transformer\app\TextTransformerApplication.class
-pl\put\poznan\transformer\rest\TextTransformerController.class
-pl\put\poznan\transformer\logic\TextTransformer.class
+pl\put\poznan\transformer\api\service\BuildingService.class
+pl\put\poznan\transformer\api\controller\BuildingController.class
+pl\put\poznan\transformer\api\model\BuildingComponentVisitor.class
+pl\put\poznan\transformer\api\BuildingInfoApplication.class
+pl\put\poznan\transformer\api\model\Room.class
+pl\put\poznan\transformer\api\model\ConcreteVisitor.class
+pl\put\poznan\transformer\api\model\BuildingComponent.class
+pl\put\poznan\transformer\api\model\ValueInfo.class
+pl\put\poznan\transformer\api\service\BuildingService$1.class
+pl\put\poznan\transformer\api\model\Building.class
+pl\put\poznan\transformer\api\model\Level.class
