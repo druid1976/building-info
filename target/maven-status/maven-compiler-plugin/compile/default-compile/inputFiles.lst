@@ -1,3 +1,10 @@
-C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\rest\TextTransformerController.java
-C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\app\TextTransformerApplication.java
-C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\logic\TextTransformer.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\controller\BuildingController.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\BuildingComponentVisitor.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\Room.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\BuildingInfoApplication.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\BuildingComponent.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\ConcreteVisitor.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\Building.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\Level.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\service\BuildingService.java
+C:\Users\erenk\building-info\src\main\java\pl\put\poznan\transformer\api\model\ValueInfo.java
