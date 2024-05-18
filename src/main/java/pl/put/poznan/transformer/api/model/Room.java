@@ -1,6 +1,6 @@
 package pl.put.poznan.transformer.api.model;
 
-public class Room {
+public class Room implements BuildingComponent {
     private String id;
     private String name;
     private double area;
@@ -55,4 +55,28 @@ public class Room {
     public void setLight(double light) {
         this.light = light;
     }
+
+    @Override
+    public double calculateArea() {
+        return area;
+    }
+
+    @Override
+    public double calculateVolume() {
+        return cube;
+    }
+
+    @Override
+    public double calculateLightingPower() {
+        return light;
+    }
+
+    @Override
+    public double calculateHeatingEnergy() {
+        return heating;
+    }
+    public void accept(BuildingComponentVisitor visitor) {
+        visitor.visit(this);
+    }
 }
+

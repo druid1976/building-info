@@ -2,8 +2,7 @@ package pl.put.poznan.transformer.api.model;
 
 import java.util.List;
 
-public class Level {
-
+public class Level implements BuildingComponent {
     private String id;
     private String name;
     private List<Room> rooms;
@@ -30,5 +29,32 @@ public class Level {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public double calculateArea() {
+        return rooms.stream().mapToDouble(Room::calculateArea).sum();
+    }
+
+    @Override
+    public double calculateVolume() {
+        return rooms.stream().mapToDouble(Room::calculateVolume).sum();
+    }
+
+    @Override
+    public double calculateLightingPower() {
+        return rooms.stream().mapToDouble(Room::calculateLightingPower).sum();
+    }
+
+    @Override
+    public double calculateHeatingEnergy() {
+        return rooms.stream().mapToDouble(Room::calculateHeatingEnergy).sum();
+    }
+
+    public void accept(BuildingComponentVisitor visitor) {
+        visitor.visit(this);
+        for (Room room : rooms) {
+            room.accept(visitor);
+        }
     }
 }

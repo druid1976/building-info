@@ -4,17 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import pl.put.poznan.transformer.api.model.ValueInfo;
-import pl.put.poznan.transformer.api.model.Building;
-import pl.put.poznan.transformer.api.model.Level;
-import pl.put.poznan.transformer.api.model.Room;
+import pl.put.poznan.transformer.api.model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class BuildingService {
@@ -26,7 +22,6 @@ public class BuildingService {
             loadBuildingData();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle exception
         }
     }
 
@@ -36,210 +31,187 @@ public class BuildingService {
         buildings = objectMapper.readValue(inputStream, new TypeReference<List<Building>>() {});
     }
 
+    public List<Building> getAllBuildings() {
+        return buildings;
+    }
+
     public Building getBuildingById(String id) {
-        Optional<Building> optionalBuilding = buildings.stream()
+        return buildings.stream()
                 .filter(building -> building.getId().equals(id))
-                .findFirst();
-        return optionalBuilding.orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
     public Level getLevelById(String buildingId, String levelId) {
-        Optional<Building> optionalBuilding = buildings.stream()
-                .filter(building -> building.getId().equals(buildingId))
-                .findFirst();
-        if (optionalBuilding.isPresent()) {
-            Optional<Level> optionalLevel = optionalBuilding.get().getLevels().stream()
+        Building building = getBuildingById(buildingId);
+        if (building != null) {
+            return building.getLevels().stream()
                     .filter(level -> level.getId().equals(levelId))
-                    .findFirst();
-            return optionalLevel.orElse(null);
+                    .findFirst()
+                    .orElse(null);
         }
         return null;
     }
 
     public Room getRoomById(String buildingId, String levelId, String roomId) {
-        Optional<Building> optionalBuilding = buildings.stream()
-                .filter(building -> building.getId().equals(buildingId))
-                .findFirst();
-        if (optionalBuilding.isPresent()) {
-            Optional<Level> optionalLevel = optionalBuilding.get().getLevels().stream()
-                    .filter(level -> level.getId().equals(levelId))
-                    .findFirst();
-            if (optionalLevel.isPresent()) {
-                Optional<Room> optionalRoom = optionalLevel.get().getRooms().stream()
-                        .filter(room -> room.getId().equals(roomId))
-                        .findFirst();
-                return optionalRoom.orElse(null);
-            }
+        Level level = getLevelById(buildingId, levelId);
+        if (level != null) {
+            return level.getRooms().stream()
+                    .filter(room -> room.getId().equals(roomId))
+                    .findFirst()
+                    .orElse(null);
         }
         return null;
     }
 
-    /* AREA INFO LOGIC */
     public ValueInfo getTotalAreaOfBuilding(String buildingId) {
-        double totalArea = 0.0;
         Building building = getBuildingById(buildingId);
         if (building != null) {
-            totalArea = building.getLevels().stream()
+            double totalArea = building.getLevels().stream()
                     .flatMap(level -> level.getRooms().stream())
                     .mapToDouble(Room::getArea)
                     .sum();
+            return new ValueInfo(totalArea);
         }
-        return new ValueInfo(totalArea);
+        return new ValueInfo(0);
     }
 
     public ValueInfo getTotalAreaOfLevel(String buildingId, String levelId) {
-        double totalArea = 0.0;
         Level level = getLevelById(buildingId, levelId);
         if (level != null) {
-            totalArea = level.getRooms().stream()
+            double totalArea = level.getRooms().stream()
                     .mapToDouble(Room::getArea)
                     .sum();
+            return new ValueInfo(totalArea);
         }
-        return new ValueInfo(totalArea);
+        return new ValueInfo(0);
     }
 
     public ValueInfo getAreaOfRoom(String buildingId, String levelId, String roomId) {
-        double area = 0.0;
         Room room = getRoomById(buildingId, levelId, roomId);
         if (room != null) {
-            area = room.getArea();
+            return new ValueInfo(room.getArea());
         }
-        return new ValueInfo(area);
+        return new ValueInfo(0);
     }
 
-    /* VOLUME INFO LOGIC */
     public ValueInfo getTotalVolumeOfBuilding(String buildingId) {
-        double totalVolume = 0.0;
         Building building = getBuildingById(buildingId);
         if (building != null) {
-            totalVolume = building.getLevels().stream()
+            double totalVolume = building.getLevels().stream()
                     .flatMap(level -> level.getRooms().stream())
                     .mapToDouble(Room::getCube)
                     .sum();
+            return new ValueInfo(totalVolume);
         }
-        return new ValueInfo(totalVolume);
+        return new ValueInfo(0);
     }
 
     public ValueInfo getTotalVolumeOfLevel(String buildingId, String levelId) {
-        double totalVolume = 0.0;
         Level level = getLevelById(buildingId, levelId);
         if (level != null) {
-            totalVolume = level.getRooms().stream()
+            double totalVolume = level.getRooms().stream()
                     .mapToDouble(Room::getCube)
                     .sum();
+            return new ValueInfo(totalVolume);
         }
-        return new ValueInfo(totalVolume);
+        return new ValueInfo(0);
     }
 
     public ValueInfo getVolumeOfRoom(String buildingId, String levelId, String roomId) {
-        double volume = 0.0;
         Room room = getRoomById(buildingId, levelId, roomId);
         if (room != null) {
-            volume = room.getCube();
+            return new ValueInfo(room.getCube());
         }
-        return new ValueInfo(volume);
+        return new ValueInfo(0);
     }
 
-    /* Lightning power logic */
     public ValueInfo getLightingPowerPerUnitAreaOfRoom(String buildingId, String levelId, String roomId) {
         Room room = getRoomById(buildingId, levelId, roomId);
         if (room != null) {
             double powerPerUnitArea = room.getLight() / room.getArea();
             return new ValueInfo(powerPerUnitArea);
         }
-        return null;
+        return new ValueInfo(0);
     }
 
     public ValueInfo getAverageLightingPowerPerUnitAreaOfLevel(String buildingId, String levelId) {
         Level level = getLevelById(buildingId, levelId);
         if (level != null) {
-            double totalPower = 0.0;
-            double totalArea = 0.0;
-            for (Room room : level.getRooms()) {
-                totalPower += room.getLight();
-                totalArea += room.getArea();
-            }
-            double averagePowerPerUnitArea = totalPower / totalArea;
-            return new ValueInfo(averagePowerPerUnitArea);
+            double totalPower = level.getRooms().stream().mapToDouble(Room::getLight).sum();
+            double totalArea = level.getRooms().stream().mapToDouble(Room::getArea).sum();
+            return new ValueInfo(totalPower / totalArea);
         }
-        return null;
+        return new ValueInfo(0);
     }
 
     public ValueInfo getAverageLightingPowerPerUnitAreaOfBuilding(String buildingId) {
         Building building = getBuildingById(buildingId);
         if (building != null) {
-            double totalPower = 0.0;
-            double totalArea = 0.0;
-            for (Level level : building.getLevels()) {
-                for (Room room : level.getRooms()) {
-                    totalPower += room.getLight();
-                    totalArea += room.getArea();
-                }
-            }
-            double averagePowerPerUnitArea = totalPower / totalArea;
-            return new ValueInfo(averagePowerPerUnitArea);
+            double totalPower = building.getLevels().stream()
+                    .flatMap(level -> level.getRooms().stream())
+                    .mapToDouble(Room::getLight)
+                    .sum();
+            double totalArea = building.getLevels().stream()
+                    .flatMap(level -> level.getRooms().stream())
+                    .mapToDouble(Room::getArea)
+                    .sum();
+            return new ValueInfo(totalPower / totalArea);
         }
-        return null;
+        return new ValueInfo(0);
     }
 
-    /* HEATING LOGIC */
     public ValueInfo getHeatingEnergyConsumptionPerUnitVolumeOfRoom(String buildingId, String levelId, String roomId) {
         Room room = getRoomById(buildingId, levelId, roomId);
         if (room != null && room.getCube() != 0) {
             double consumptionPerUnitVolume = room.getHeating() / room.getCube();
             return new ValueInfo(consumptionPerUnitVolume);
         }
-        return null;
+        return new ValueInfo(0);
     }
 
     public ValueInfo getAverageHeatingEnergyConsumptionPerUnitVolumeOfLevel(String buildingId, String levelId) {
         Level level = getLevelById(buildingId, levelId);
         if (level != null) {
-            double totalConsumption = 0.0;
-            double totalVolume = 0.0;
-            for (Room room : level.getRooms()) {
-                totalConsumption += room.getHeating();
-                totalVolume += room.getCube();
-            }
-            double averageConsumptionPerUnitVolume = totalConsumption / totalVolume;
-            return new ValueInfo(averageConsumptionPerUnitVolume);
+            double totalConsumption = level.getRooms().stream().mapToDouble(Room::getHeating).sum();
+            double totalVolume = level.getRooms().stream().mapToDouble(Room::getCube).sum();
+            return new ValueInfo(totalConsumption / totalVolume);
         }
-        return null;
+        return new ValueInfo(0);
     }
 
     public ValueInfo getAverageHeatingEnergyConsumptionPerUnitVolumeOfBuilding(String buildingId) {
         Building building = getBuildingById(buildingId);
         if (building != null) {
-            double totalConsumption = 0.0;
-            double totalVolume = 0.0;
-            for (Level level : building.getLevels()) {
-                for (Room room : level.getRooms()) {
-                    totalConsumption += room.getHeating();
-                    totalVolume += room.getCube();
-                }
-            }
-            double averageConsumptionPerUnitVolume = totalConsumption / totalVolume;
-            return new ValueInfo(averageConsumptionPerUnitVolume);
+            double totalConsumption = building.getLevels().stream()
+                    .flatMap(level -> level.getRooms().stream())
+                    .mapToDouble(Room::getHeating)
+                    .sum();
+            double totalVolume = building.getLevels().stream()
+                    .flatMap(level -> level.getRooms().stream())
+                    .mapToDouble(Room::getCube)
+                    .sum();
+            return new ValueInfo(totalConsumption / totalVolume);
         }
-        return null;
+        return new ValueInfo(0);
     }
-    /* exceeding logic */
+
     public List<Room> getRoomsExceedingHeatLimit(String buildingId, double limit) {
         List<Room> roomsExceedingLimit = new ArrayList<>();
         Building building = getBuildingById(buildingId);
         if (building != null) {
-            for (Level level : building.getLevels()) {
-                for (Room room : level.getRooms()) {
-                    double heatPerUnitVolume = room.getHeating() / room.getCube();
-                    if (heatPerUnitVolume > limit) {
-                        roomsExceedingLimit.add(room);
-                    }
-                }
-            }
+            building.getLevels().stream()
+                    .flatMap(level -> level.getRooms().stream())
+                    .filter(room -> room.getHeating() / room.getCube() > limit)
+                    .forEach(roomsExceedingLimit::add);
         }
         return roomsExceedingLimit;
     }
+
+    public void applyVisitorToBuilding(String buildingId, BuildingComponentVisitor visitor) {
+        Building building = getBuildingById(buildingId);
+        if (building != null) {
+            building.accept(visitor);
+        }
+    }
 }
-
-
-
