@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
  * The Room class represents a room in a building level.
  * It provides methods to calculate the area, volume, and lighting power of the room.
  */
-public class Room {
+public class Room implements BuildingComponent{
     private static final Logger logger = LoggerFactory.getLogger(Room.class);
     private String id;
     private String name;
@@ -160,4 +160,27 @@ public class Room {
         logger.debug("Lighting power for room {}: {}", id, light);
         return light;
     }
+
+    /**
+     * Calculates the heating energy of the room.
+     * @return the heating energy of the room.
+     */
+    @Override
+    public double calculateHeatingEnergy() {
+        logger.info("Calculating heating energy for room: {}", id);
+        logger.debug("Heating energy for room {}: {}", id, heating);
+        return heating;
+    }
+
+    /**
+     * Accepts a visitor to perform operations on the room.
+     * @param visitor the visitor to accept.
+     */
+    @Override
+    public void accept(BuildingComponentVisitor visitor) {
+        logger.info("Accepting visitor for room: {}", id);
+        visitor.visit(this);
+    }
 }
+
+

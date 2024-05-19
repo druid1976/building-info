@@ -8,7 +8,7 @@ import java.util.List;
  * The Building class represents a building containing multiple levels.
  * It provides methods to calculate the total area and volume of the building.
  */
-public class Building {
+public class Building implements BuildingComponent{
     private static final Logger logger = LoggerFactory.getLogger(Building.class);
     private String id;
     private String name;
@@ -79,6 +79,7 @@ public class Building {
      * Calculates the total area of the building.
      * @return the total area of the building.
      */
+    @Override
     public double calculateArea() {
         logger.info("Calculating total area for building: {}", id);
         double totalArea = levels.stream().mapToDouble(Level::calculateArea).sum();
@@ -90,6 +91,7 @@ public class Building {
      * Calculates the total volume of the building.
      * @return the total volume of the building.
      */
+    @Override
     public double calculateVolume() {
         logger.info("Calculating total volume for building: {}", id);
         double totalVolume = levels.stream().mapToDouble(Level::calculateVolume).sum();
@@ -98,9 +100,35 @@ public class Building {
     }
 
     /**
+     * Calculates the total lighting power of the building.
+     * @return the total lighting power of the building.
+     */
+    @Override
+    public double calculateLightingPower() {
+        logger.info("Calculating total lighting power for building: {}", id);
+        double totalPower = levels.stream().mapToDouble(Level::calculateLightingPower).sum();
+        logger.debug("Total lighting power for building {}: {}", id, totalPower);
+        return totalPower;
+    }
+
+    /**
+     * Calculates the total heating energy of the building.
+     * @return the total heating energy of the building.
+     */
+    @Override
+    public double calculateHeatingEnergy() {
+        logger.info("Calculating total heating energy for building: {}", id);
+        double totalEnergy = levels.stream().mapToDouble(Level::calculateHeatingEnergy).sum();
+        logger.debug("Total heating energy for building {}: {}", id, totalEnergy);
+        return totalEnergy;
+    }
+
+
+    /**
      * Accepts a visitor to perform operations on the building.
      * @param visitor the visitor to accept.
      */
+    @Override
     public void accept(BuildingComponentVisitor visitor) {
         logger.info("Accepting visitor for building: {}", id);
         visitor.visit(this);

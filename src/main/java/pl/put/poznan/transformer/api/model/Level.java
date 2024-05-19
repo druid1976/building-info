@@ -8,7 +8,7 @@ import java.util.List;
  * The Level class represents a level in a building containing multiple rooms.
  * It provides methods to calculate the total area and volume of the level.
  */
-public class Level {
+public class Level implements BuildingComponent {
     private static final Logger logger = LoggerFactory.getLogger(Level.class);
     private String id;
     private String name;
@@ -95,5 +95,34 @@ public class Level {
         double totalVolume = rooms.stream().mapToDouble(Room::calculateVolume).sum();
         logger.debug("Total volume for level {}: {}", id, totalVolume);
         return totalVolume;
+    }
+    @Override
+    public double calculateLightingPower() {
+        logger.info("Calculating total lighting power for level: {}", id);
+        double totalPower = rooms.stream().mapToDouble(Room::calculateLightingPower).sum();
+        logger.debug("Total lighting power for level {}: {}", id, totalPower);
+        return totalPower;
+    }
+
+    /**
+     * Calculates the total heating energy of the level.
+     * @return the total heating energy of the level.
+     */
+    @Override
+    public double calculateHeatingEnergy() {
+        logger.info("Calculating total heating energy for level: {}", id);
+        double totalEnergy = rooms.stream().mapToDouble(Room::calculateHeatingEnergy).sum();
+        logger.debug("Total heating energy for level {}: {}", id, totalEnergy);
+        return totalEnergy;
+    }
+
+    /**
+     * Accepts a visitor to perform operations on the level.
+     * @param visitor the visitor to accept.
+     */
+    @Override
+    public void accept(BuildingComponentVisitor visitor) {
+        logger.info("Accepting visitor for level: {}", id);
+        visitor.visit(this);
     }
 }
