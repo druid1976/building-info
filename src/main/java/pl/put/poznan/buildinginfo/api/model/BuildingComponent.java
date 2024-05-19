@@ -1,5 +1,7 @@
 // BuildingComponent.java
-package pl.put.poznan.transformer.api.model;
+package pl.put.poznan.buildinginfo.api.model;
+
+import pl.put.poznan.buildinginfo.api.model.visitors.BuildingComponentVisitor;
 
 public interface BuildingComponent {
     double calculateArea();

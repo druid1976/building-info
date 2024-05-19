@@ -1,7 +1,10 @@
-package pl.put.poznan.transformer.api.model;
+package pl.put.poznan.buildinginfo.api.model.visitors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.put.poznan.buildinginfo.api.model.Building;
+import pl.put.poznan.buildinginfo.api.model.Level;
+import pl.put.poznan.buildinginfo.api.model.Room;
 
 public class ConcreteVisitor implements BuildingComponentVisitor {
     private static final Logger logger = LoggerFactory.getLogger(ConcreteVisitor.class);

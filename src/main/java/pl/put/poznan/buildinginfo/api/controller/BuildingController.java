@@ -1,12 +1,12 @@
-package pl.put.poznan.transformer.api.controller;
+package pl.put.poznan.buildinginfo.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.transformer.api.model.Building;
-import pl.put.poznan.transformer.api.model.Level;
-import pl.put.poznan.transformer.api.model.Room;
-import pl.put.poznan.transformer.api.model.ValueInfo;
-import pl.put.poznan.transformer.api.service.BuildingService;
+import pl.put.poznan.buildinginfo.api.model.Building;
+import pl.put.poznan.buildinginfo.api.model.Level;
+import pl.put.poznan.buildinginfo.api.model.Room;
+import pl.put.poznan.buildinginfo.api.model.ValueInfo;
+import pl.put.poznan.buildinginfo.api.service.BuildingService;
 import java.util.List;
 
 import org.slf4j.Logger;

@@ -1,9 +1,13 @@
-package pl.put.poznan.transformer.api.service;
+package pl.put.poznan.buildinginfo.api.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import pl.put.poznan.buildinginfo.api.model.*;
+import pl.put.poznan.buildinginfo.api.model.visitors.AreaAndVolumeVisitor;
+import pl.put.poznan.buildinginfo.api.model.visitors.EnergyVisitor;
+import pl.put.poznan.buildinginfo.api.model.visitors.LightVisitor;
 import pl.put.poznan.transformer.api.model.*;
 
 import java.io.IOException;
