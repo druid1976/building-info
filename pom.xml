@@ -13,7 +13,7 @@
 
     <groupId>pl.put.poznan</groupId>
     <artifactId>building-info</artifactId>
-    <version>0.9</version>
+    <version>1.0</version>
 
 	<properties>
         <java.version>11</java.version>

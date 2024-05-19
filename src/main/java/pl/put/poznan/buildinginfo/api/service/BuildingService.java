@@ -8,7 +8,7 @@ import pl.put.poznan.buildinginfo.api.model.*;
 import pl.put.poznan.buildinginfo.api.model.visitors.AreaAndVolumeVisitor;
 import pl.put.poznan.buildinginfo.api.model.visitors.EnergyVisitor;
 import pl.put.poznan.buildinginfo.api.model.visitors.LightVisitor;
-import pl.put.poznan.transformer.api.model.*;
+import pl.put.poznan.buildinginfo.api.model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
