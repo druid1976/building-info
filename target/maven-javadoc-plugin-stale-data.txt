@@ -19,13 +19,13 @@
 -docencoding
 'UTF-8'
 -doctitle
-'building-info 0.4 API'
+'building-info 0.9 API'
 -linkoffline
 'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/Users/erenk/building-info/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'building-info 0.4 API'
+'building-info 0.9 API'
 pl.put.poznan.transformer.api
 pl.put.poznan.transformer.api.controller
 pl.put.poznan.transformer.api.model
@@ -130,18 +130,18 @@ C:\Users\erenk\.m2\repository\org\slf4j\slf4j-api\1.7.30\slf4j-api-1.7.30.jar = 
 C:\Users\erenk\.m2\repository\ch\qos\logback\logback-classic\1.2.3\logback-classic-1.2.3.jar = 1490988473000
 C:\Users\erenk\.m2\repository\ch\qos\logback\logback-core\1.2.3\logback-core-1.2.3.jar = 1490988435000
 C:\Users\erenk\building-info\src\main\java = 1716060763229
-C:\Users\erenk\building-info\target\generated-sources\annotations = 1716130446278
-C:\Users\erenk\building-info\target\site\apidocs\allclasses-index.html = 1716130457254
-C:\Users\erenk\building-info\target\site\apidocs\allpackages-index.html = 1716130457254
-C:\Users\erenk\building-info\target\site\apidocs\element-list = 1716130457048
-C:\Users\erenk\building-info\target\site\apidocs\help-doc.html = 1716130457316
-C:\Users\erenk\building-info\target\site\apidocs\index-all.html = 1716130457305
-C:\Users\erenk\building-info\target\site\apidocs\index.html = 1716130457221
-C:\Users\erenk\building-info\target\site\apidocs\member-search-index.js = 1716130457254
-C:\Users\erenk\building-info\target\site\apidocs\module-search-index.js = 1716130457254
-C:\Users\erenk\building-info\target\site\apidocs\overview-summary.html = 1716130457305
-C:\Users\erenk\building-info\target\site\apidocs\overview-tree.html = 1716130457221
-C:\Users\erenk\building-info\target\site\apidocs\package-search-index.js = 1716130457254
-C:\Users\erenk\building-info\target\site\apidocs\search.html = 1716130457305
-C:\Users\erenk\building-info\target\site\apidocs\tag-search-index.js = 1716130457268
-C:\Users\erenk\building-info\target\site\apidocs\type-search-index.js = 1716130457254
+C:\Users\erenk\building-info\target\generated-sources\annotations = 1716141758111
+C:\Users\erenk\building-info\target\site\apidocs\allclasses-index.html = 1716141764364
+C:\Users\erenk\building-info\target\site\apidocs\allpackages-index.html = 1716141764367
+C:\Users\erenk\building-info\target\site\apidocs\element-list = 1716141764155
+C:\Users\erenk\building-info\target\site\apidocs\help-doc.html = 1716141764435
+C:\Users\erenk\building-info\target\site\apidocs\index-all.html = 1716141764414
+C:\Users\erenk\building-info\target\site\apidocs\index.html = 1716141764334
+C:\Users\erenk\building-info\target\site\apidocs\member-search-index.js = 1716141764376
+C:\Users\erenk\building-info\target\site\apidocs\module-search-index.js = 1716141764370
+C:\Users\erenk\building-info\target\site\apidocs\overview-summary.html = 1716141764420
+C:\Users\erenk\building-info\target\site\apidocs\overview-tree.html = 1716141764329
+C:\Users\erenk\building-info\target\site\apidocs\package-search-index.js = 1716141764372
+C:\Users\erenk\building-info\target\site\apidocs\search.html = 1716141764417
+C:\Users\erenk\building-info\target\site\apidocs\tag-search-index.js = 1716141764378
+C:\Users\erenk\building-info\target\site\apidocs\type-search-index.js = 1716141764374

@@ -1,3 +1,4 @@
+pl\put\poznan\transformer\api\model\LightVisitor.class
 pl\put\poznan\transformer\api\service\BuildingService.class
 pl\put\poznan\transformer\api\controller\BuildingController.class
 pl\put\poznan\transformer\api\model\BuildingComponentVisitor.class
@@ -5,7 +6,9 @@ pl\put\poznan\transformer\api\BuildingInfoApplication.class
 pl\put\poznan\transformer\api\model\Room.class
 pl\put\poznan\transformer\api\model\ConcreteVisitor.class
 pl\put\poznan\transformer\api\model\BuildingComponent.class
+pl\put\poznan\transformer\api\model\AreaAndVolumeVisitor.class
 pl\put\poznan\transformer\api\model\ValueInfo.class
 pl\put\poznan\transformer\api\service\BuildingService$1.class
+pl\put\poznan\transformer\api\model\EnergyVisitor.class
 pl\put\poznan\transformer\api\model\Building.class
 pl\put\poznan\transformer\api\model\Level.class
