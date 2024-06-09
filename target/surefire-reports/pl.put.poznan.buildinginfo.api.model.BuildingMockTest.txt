@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: pl.put.poznan.buildinginfo.api.model.BuildingMockTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.737 s - in pl.put.poznan.buildinginfo.api.model.BuildingMockTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.556 s - in pl.put.poznan.buildinginfo.api.model.BuildingMockTest
