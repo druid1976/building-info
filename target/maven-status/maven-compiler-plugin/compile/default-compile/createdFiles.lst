@@ -3,6 +3,7 @@ pl\put\poznan\buildinginfo\api\model\visitors\AreaAndVolumeVisitor.class
 pl\put\poznan\buildinginfo\api\model\visitors\BuildingComponentVisitor.class
 pl\put\poznan\buildinginfo\api\service\BuildingService$1.class
 pl\put\poznan\buildinginfo\api\model\visitors\EnergyVisitor.class
+pl\put\poznan\buildinginfo\api\model\visitors\WaterVisitor.class
 pl\put\poznan\buildinginfo\api\service\BuildingService.class
 pl\put\poznan\buildinginfo\api\controller\BuildingController.class
 pl\put\poznan\buildinginfo\api\model\Building.class

@@ -10,7 +10,7 @@ import java.util.List;
  * The Building class represents a building containing multiple levels.
  * It provides methods to calculate the total area and volume of the building.
  */
-public class Building implements BuildingComponent{
+public class Building implements BuildingComponent {
     private static final Logger logger = LoggerFactory.getLogger(Building.class);
     private String id;
     private String name;
@@ -125,6 +125,27 @@ public class Building implements BuildingComponent{
         return totalEnergy;
     }
 
+    /**
+     * Calculates the total water consumption of the building.
+     * @return the total water consumption of the building.
+     */
+    public double calculateWaterConsumption() {
+        logger.info("Calculating total water consumption for building: {}", id);
+        double totalWater = levels.stream().mapToDouble(Level::calculateWaterConsumption).sum();
+        logger.debug("Total water consumption for building {}: {}", id, totalWater);
+        return totalWater;
+    }
+
+    /**
+     * Calculates the water consumption per unit volume of the building.
+     * @return the water consumption per unit volume of the building.
+     */
+    public double calculateWaterConsumptionPerUnitVolume() {
+        logger.info("Calculating water consumption per unit volume for building: {}", id);
+        double waterConsumptionPerUnitVolume = calculateWaterConsumption() / calculateVolume();
+        logger.debug("Water consumption per unit volume for building {}: {}", id, waterConsumptionPerUnitVolume);
+        return waterConsumptionPerUnitVolume;
+    }
 
     /**
      * Accepts a visitor to perform operations on the building.

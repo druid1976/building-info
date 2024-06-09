@@ -16,6 +16,7 @@ public class Room implements BuildingComponent{
     private double cube;
     private double light;
     private double heating;
+    private double water;
 
     /**
      * Constructs a new Room.
@@ -133,6 +134,24 @@ public class Room implements BuildingComponent{
     }
 
     /**
+     * Gets the water consumption of the room.
+     * @return the water consumption of the room.
+     */
+    public double getWater() {
+        logger.info("Getting water: {}", water);
+        return water;
+    }
+
+    /**
+     * Sets the water consumption of the room.
+     * @param water the new water consumption of the room.
+     */
+    public void setWater(double water) {
+        logger.info("Setting water: {}", water);
+        this.water = water;
+    }
+
+    /**
      * Calculates the area of the room.
      * @return the area of the room.
      */
@@ -174,6 +193,17 @@ public class Room implements BuildingComponent{
     }
 
     /**
+     * Calculates the water consumption per unit volume of the room.
+     * @return the water consumption per unit volume of the room.
+     */
+    public double calculateWaterConsumptionPerUnitVolume() {
+        logger.info("Calculating water consumption per unit volume for room: {}", id);
+        double waterConsumptionPerUnitVolume = water / cube;
+        logger.debug("Water consumption per unit volume for room {}: {}", id, waterConsumptionPerUnitVolume);
+        return waterConsumptionPerUnitVolume;
+    }
+
+    /**
      * Accepts a visitor to perform operations on the room.
      * @param visitor the visitor to accept.
      */
@@ -183,5 +213,3 @@ public class Room implements BuildingComponent{
         visitor.visit(this);
     }
 }
-
-

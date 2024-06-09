@@ -98,6 +98,11 @@ public class Level implements BuildingComponent {
         logger.debug("Total volume for level {}: {}", id, totalVolume);
         return totalVolume;
     }
+
+    /**
+     * Calculates the total lighting power of the level.
+     * @return the total lighting power of the level.
+     */
     @Override
     public double calculateLightingPower() {
         logger.info("Calculating total lighting power for level: {}", id);
@@ -116,6 +121,28 @@ public class Level implements BuildingComponent {
         double totalEnergy = rooms.stream().mapToDouble(Room::calculateHeatingEnergy).sum();
         logger.debug("Total heating energy for level {}: {}", id, totalEnergy);
         return totalEnergy;
+    }
+
+    /**
+     * Calculates the total water consumption of the level.
+     * @return the total water consumption of the level.
+     */
+    public double calculateWaterConsumption() {
+        logger.info("Calculating total water consumption for level: {}", id);
+        double totalWater = rooms.stream().mapToDouble(Room::getWater).sum();
+        logger.debug("Total water consumption for level {}: {}", id, totalWater);
+        return totalWater;
+    }
+
+    /**
+     * Calculates the water consumption per unit volume of the level.
+     * @return the water consumption per unit volume of the level.
+     */
+    public double calculateWaterConsumptionPerUnitVolume() {
+        logger.info("Calculating water consumption per unit volume for level: {}", id);
+        double waterConsumptionPerUnitVolume = calculateWaterConsumption() / calculateVolume();
+        logger.debug("Water consumption per unit volume for level {}: {}", id, waterConsumptionPerUnitVolume);
+        return waterConsumptionPerUnitVolume;
     }
 
     /**

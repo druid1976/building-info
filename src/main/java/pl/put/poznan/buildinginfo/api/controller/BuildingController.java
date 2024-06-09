@@ -37,6 +37,7 @@ public class BuildingController {
         logger.info("Received request to get level with ID: {} from building with ID: {}", levelId, buildingId);
         return buildingService.getLevelById(buildingId, levelId);
     }
+
     @GetMapping("/{buildingId}/levels/{levelId}/rooms/{roomId}")
     public Room getRoomById(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
         logger.info("Received request to get room with ID: {} from level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
@@ -118,6 +119,24 @@ public class BuildingController {
     @GetMapping("/{buildingId}/rooms-exceeding-heat-limit")
     public List<Room> getRoomsExceedingHeatLimit(@PathVariable String buildingId, @RequestParam double limit) {
         logger.info("Received request to get rooms exceeding heat limit in building with ID: {}", buildingId);
-        return buildingService.getRoomsExceedingHeatLimit(buildingId,limit);
+        return buildingService.getRoomsExceedingHeatLimit(buildingId, limit);
+    }
+
+    @GetMapping("/{buildingId}/water")
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfBuilding(@PathVariable String buildingId) {
+        logger.info("Received request to get water consumption per unit volume of building with ID: {}", buildingId);
+        return buildingService.getWaterConsumptionPerUnitVolumeOfBuilding(buildingId);
+    }
+
+    @GetMapping("/{buildingId}/levels/{levelId}/water")
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfLevel(@PathVariable String buildingId, @PathVariable String levelId) {
+        logger.info("Received request to get water consumption per unit volume of level with ID: {} in building with ID: {}", levelId, buildingId);
+        return buildingService.getWaterConsumptionPerUnitVolumeOfLevel(buildingId, levelId);
+    }
+
+    @GetMapping("/{buildingId}/levels/{levelId}/rooms/{roomId}/water")
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfRoom(@PathVariable String buildingId, @PathVariable String levelId, @PathVariable String roomId) {
+        logger.info("Received request to get water consumption per unit volume of room with ID: {} in level with ID: {} in building with ID: {}", roomId, levelId, buildingId);
+        return buildingService.getWaterConsumptionPerUnitVolumeOfRoom(buildingId, levelId, roomId);
     }
 }

@@ -8,7 +8,7 @@ import pl.put.poznan.buildinginfo.api.model.*;
 import pl.put.poznan.buildinginfo.api.model.visitors.AreaAndVolumeVisitor;
 import pl.put.poznan.buildinginfo.api.model.visitors.EnergyVisitor;
 import pl.put.poznan.buildinginfo.api.model.visitors.LightVisitor;
-import pl.put.poznan.buildinginfo.api.model.*;
+import pl.put.poznan.buildinginfo.api.model.visitors.WaterVisitor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -190,6 +190,36 @@ public class BuildingService {
             EnergyVisitor visitor = new EnergyVisitor();
             building.accept(visitor);
             return new ValueInfo(visitor.getAverageEnergyPerUnitVolume());
+        }
+        return new ValueInfo(0);
+    }
+
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfRoom(String buildingId, String levelId, String roomId) {
+        Room room = getRoomById(buildingId, levelId, roomId);
+        if (room != null) {
+            WaterVisitor visitor = new WaterVisitor();
+            room.accept(visitor);
+            return new ValueInfo(visitor.getWaterConsumptionPerUnitVolume());
+        }
+        return new ValueInfo(0);
+    }
+
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfLevel(String buildingId, String levelId) {
+        Level level = getLevelById(buildingId, levelId);
+        if (level != null) {
+            WaterVisitor visitor = new WaterVisitor();
+            level.accept(visitor);
+            return new ValueInfo(visitor.getWaterConsumptionPerUnitVolume());
+        }
+        return new ValueInfo(0);
+    }
+
+    public ValueInfo getWaterConsumptionPerUnitVolumeOfBuilding(String buildingId) {
+        Building building = getBuildingById(buildingId);
+        if (building != null) {
+            WaterVisitor visitor = new WaterVisitor();
+            building.accept(visitor);
+            return new ValueInfo(visitor.getWaterConsumptionPerUnitVolume());
         }
         return new ValueInfo(0);
     }
