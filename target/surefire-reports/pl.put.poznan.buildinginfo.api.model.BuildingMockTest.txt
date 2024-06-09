@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: pl.put.poznan.buildinginfo.api.model.BuildingMockTest
 -------------------------------------------------------------------------------
-<<<<<<< Updated upstream
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.737 s - in pl.put.poznan.buildinginfo.api.model.BuildingMockTest
-=======
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.683 s - in pl.put.poznan.buildinginfo.api.model.BuildingMockTest
->>>>>>> Stashed changes
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.607 s - in pl.put.poznan.buildinginfo.api.model.BuildingMockTest
