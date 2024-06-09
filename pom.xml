@@ -11,7 +11,11 @@
 
     <groupId>pl.put.poznan</groupId>
     <artifactId>building-info</artifactId>
+<<<<<<< Updated upstream
     <version>1.1.2</version>
+=======
+    <version>1.2.5</version>
+>>>>>>> Stashed changes
 
     <properties>
         <java.version>11</java.version>
@@ -96,11 +100,45 @@
                 <version>3.6.3</version>
                 <executions>
                     <execution>
+<<<<<<< Updated upstream
                         <id>attach-javadocs</id>
                         <phase>package</phase>
                         <goals>
                             <goal>javadoc</goal>
+=======
+                        <id>generate-javadocs</id>
+                        <goals>
+                            <goal>javadoc</goal>
                         </goals>
+                        <configuration>
+                            <reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-javadoc</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+>>>>>>> Stashed changes
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/docs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/apidocs</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
