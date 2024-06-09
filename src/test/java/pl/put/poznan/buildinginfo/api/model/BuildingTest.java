@@ -1,163 +1,93 @@
 package pl.put.poznan.buildinginfo.api.model;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-
-
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
-class BuildingTest {
-
+public class BuildingTest {
     private Building building;
+    private Level level1;
+    private Level level2;
 
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         building = new Building();
+        level1 = new Level();
+        level2 = new Level();
+
+        // Mocking Room setup to simplify the example
+        Room room1 = new Room();
+        Room room2 = new Room();
+        room1.setArea(100.0);
+        room1.setCube(300.0);
+        room1.setLight(500.0);
+        room1.setHeating(600.0);
+        room1.setWater(150.0);
+        room2.setArea(200.0);
+        room2.setCube(400.0);
+        room2.setLight(600.0);
+        room2.setHeating(700.0);
+        room2.setWater(250.0);
+
+        // Setting up levels with rooms
+        level1.setRooms(new ArrayList<>(Arrays.asList(room1)));
+        level2.setRooms(new ArrayList<>(Arrays.asList(room2)));
+
+        building.setId("B001");
+        building.setName("Main Building");
+        building.setLevels(Arrays.asList(level1, level2));
     }
 
     @Test
-    void testSetId() {
-        building.setId("B001");
+    public void testBuildingId() {
         assertEquals("B001", building.getId());
     }
 
     @Test
-    void testGetId() {
-        building.setId("B002");
-        String id = building.getId();
-        assertEquals("B002", id);
-    }
-
-    @Test
-    void testSetName() {
-        building.setName("Main Building");
+    public void testBuildingName() {
         assertEquals("Main Building", building.getName());
     }
 
     @Test
-    void testGetName() {
-        building.setName("Secondary Building");
-        String name = building.getName();
-        assertEquals("Secondary Building", name);
+    public void testGetLevels() {
+        assertEquals(Arrays.asList(level1, level2), building.getLevels());
     }
 
     @Test
-    void testSetLevels() {
-        Level level1 = new Level();
-        Level level2 = new Level();
-        List<Level> levels = Arrays.asList(level1, level2);
-        building.setLevels(levels);
-        assertEquals(levels, building.getLevels());
+    public void testCalculateTotalArea() {
+        double expectedArea = 100.0 + 200.0; // Sum of areas from level1 and level2
+        assertEquals(expectedArea, building.calculateArea(), 0.0);
     }
 
     @Test
-    void testGetLevels() {
-        Level level1 = new Level();
-        Level level2 = new Level();
-        List<Level> levels = Arrays.asList(level1, level2);
-        building.setLevels(levels);
-        List<Level> retrievedLevels = building.getLevels();
-        assertEquals(levels, retrievedLevels);
+    public void testCalculateTotalVolume() {
+        double expectedVolume = 300.0 + 400.0; // Sum of volumes from level1 and level2
+        assertEquals(expectedVolume, building.calculateVolume(), 0.0);
     }
 
     @Test
-    void testCalculateArea() {
-        Room room1 = new Room();
-        room1.setArea(50.0);
-        Room room2 = new Room();
-        room2.setArea(50.0);
-
-        Level level1 = new Level();
-        level1.setRooms(Arrays.asList(room1, room2));
-
-        Room room3 = new Room();
-        room3.setArea(100.0);
-        Room room4 = new Room();
-        room4.setArea(100.0);
-
-        Level level2 = new Level();
-        level2.setRooms(Arrays.asList(room3, room4));
-
-        building.setLevels(Arrays.asList(level1, level2));
-        double totalArea = building.calculateArea();
-
-        assertEquals(300.0, totalArea);
+    public void testCalculateTotalLightingPower() {
+        double expectedLightingPower = 500.0 + 600.0; // Sum of lighting power from level1 and level2
+        assertEquals(expectedLightingPower, building.calculateLightingPower(), 0.0);
     }
 
     @Test
-    void testCalculateVolume() {
-        Room room1 = new Room();
-        room1.setCube(150.0);
-        Room room2 = new Room();
-        room2.setCube(150.0);
-
-        Level level1 = new Level();
-        level1.setRooms(Arrays.asList(room1, room2));
-
-        Room room3 = new Room();
-        room3.setCube(300.0);
-        Room room4 = new Room();
-        room4.setCube(300.0);
-
-        Level level2 = new Level();
-        level2.setRooms(Arrays.asList(room3, room4));
-
-        building.setLevels(Arrays.asList(level1, level2));
-        double totalVolume = building.calculateVolume();
-
-        assertEquals(900.0, totalVolume);
+    public void testCalculateTotalHeatingEnergy() {
+        double expectedHeatingEnergy = 600.0 + 700.0; // Sum of heating energy from level1 and level2
+        assertEquals(expectedHeatingEnergy, building.calculateHeatingEnergy(), 0.0);
     }
 
     @Test
-    void testCalculateLightingPower() {
-        Room room1 = new Room();
-        room1.setLight(20.0);
-        Room room2 = new Room();
-        room2.setLight(20.0);
-
-        Level level1 = new Level();
-        level1.setRooms(Arrays.asList(room1, room2));
-
-        Room room3 = new Room();
-        room3.setLight(40.0);
-        Room room4 = new Room();
-        room4.setLight(40.0);
-
-        Level level2 = new Level();
-        level2.setRooms(Arrays.asList(room3, room4));
-
-        building.setLevels(Arrays.asList(level1, level2));
-        double totalPower = building.calculateLightingPower();
-
-        assertEquals(120.0, totalPower);
+    public void testCalculateTotalWaterConsumption() {
+        double expectedWaterConsumption = 150.0 + 250.0; // Sum of water consumption from level1 and level2
+        assertEquals(expectedWaterConsumption, building.calculateWaterConsumption(), 0.0);
     }
 
     @Test
-    void testCalculateHeatingEnergy() {
-        Room room1 = new Room();
-        room1.setHeating(500.0);
-        Room room2 = new Room();
-        room2.setHeating(500.0);
-
-        Level level1 = new Level();
-        level1.setRooms(Arrays.asList(room1, room2));
-
-        Room room3 = new Room();
-        room3.setHeating(1000.0);
-        Room room4 = new Room();
-        room4.setHeating(1000.0);
-
-        Level level2 = new Level();
-        level2.setRooms(Arrays.asList(room3, room4));
-
-        building.setLevels(Arrays.asList(level1, level2));
-        double totalEnergy = building.calculateHeatingEnergy();
-
-        assertEquals(3000.0, totalEnergy);
+    public void testCalculateWaterConsumptionPerUnitVolume() {
+        double expectedWaterPerUnitVolume = (150.0 + 250.0) / (300.0 + 400.0);
+        assertEquals(expectedWaterPerUnitVolume, building.calculateWaterConsumptionPerUnitVolume(), 0.0001);
     }
 }

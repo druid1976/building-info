@@ -1,78 +1,86 @@
 package pl.put.poznan.buildinginfo.api.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class RoomTest {
+    private Room room;
 
-class RoomTest {
-
-    @Test
-    void getId() {
-        Room room = new Room();
-        room.setId("101");
-        assertEquals("101", room.getId());
-    }
-
-    @Test
-    void setId() {
-        Room room = new Room();
-        room.setId("101");
-        assertEquals("101", room.getId());
-    }
-
-    @Test
-    void getName() {
-        Room room = new Room();
-        room.setName("Room 101");
-        assertEquals("Room 101", room.getName());
-    }
-
-    @Test
-    void setName() {
-        Room room = new Room();
-        room.setName("Room 101");
-        assertEquals("Room 101", room.getName());
-    }
-
-    @Test
-    void getArea() {
-        Room room = new Room();
+    @Before
+    public void setUp() {
+        room = new Room();
+        room.setId("R001");
+        room.setName("Conference Room");
         room.setArea(50.0);
-        assertEquals(50.0, room.getArea());
+        room.setCube(150.0);
+        room.setLight(300.0);
+        room.setHeating(500.0);
+        room.setWater(200.0);
     }
 
     @Test
-    void setArea() {
-        Room room = new Room();
-        room.setArea(50.0);
-        assertEquals(50.0, room.getArea());
+    public void testRoomId() {
+        assertEquals("R001", room.getId());
     }
 
     @Test
-    void getCube() {
-        Room room = new Room();
-        room.setCube(100.0);
-        assertEquals(100.0, room.getCube());
+    public void testRoomName() {
+        assertEquals("Conference Room", room.getName());
     }
 
     @Test
-    void setCube() {
-        Room room = new Room();
-        room.setCube(100.0);
-        assertEquals(100.0, room.getCube());
+    public void testRoomArea() {
+        assertEquals(50.0, room.getArea(), 0.0);
     }
 
     @Test
-    void getLight() {
-        Room room = new Room();
-        room.setLight(500.0);
-        assertEquals(500.0, room.getLight());
+    public void testRoomCube() {
+        assertEquals(150.0, room.getCube(), 0.0);
     }
 
     @Test
-    void setLight() {
-        Room room = new Room();
-        room.setLight(500.0);
-        assertEquals(500.0, room.getLight());
+    public void testRoomLight() {
+        assertEquals(300.0, room.getLight(), 0.0);
+    }
+
+    @Test
+    public void testRoomHeating() {
+        assertEquals(500.0, room.getHeating(), 0.0);
+    }
+
+    @Test
+    public void testRoomWater() {
+        assertEquals(200.0, room.getWater(), 0.0);
+    }
+
+    @Test
+    public void testCalculateArea() {
+        double expectedArea = 50.0;
+        assertEquals(expectedArea, room.calculateArea(), 0.0);
+    }
+
+    @Test
+    public void testCalculateVolume() {
+        double expectedVolume = 150.0;
+        assertEquals(expectedVolume, room.calculateVolume(), 0.0);
+    }
+
+    @Test
+    public void testCalculateLightingPower() {
+        double expectedLightingPower = 300.0;
+        assertEquals(expectedLightingPower, room.calculateLightingPower(), 0.0);
+    }
+
+    @Test
+    public void testCalculateHeatingEnergy() {
+        double expectedHeatingEnergy = 500.0;
+        assertEquals(expectedHeatingEnergy, room.calculateHeatingEnergy(), 0.0);
+    }
+
+    @Test
+    public void testCalculateWaterConsumptionPerUnitVolume() {
+        double expectedWaterConsumptionPerUnitVolume = 200.0 / 150.0;
+        assertEquals(expectedWaterConsumptionPerUnitVolume, room.calculateWaterConsumptionPerUnitVolume(), 0.0001);
     }
 }
