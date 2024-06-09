@@ -11,7 +11,7 @@
 
     <groupId>pl.put.poznan</groupId>
     <artifactId>building-info</artifactId>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
 
     <properties>
         <java.version>11</java.version>
@@ -63,15 +63,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>${project.build.directory}/apidocs</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-                <targetPath>docs</targetPath>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -88,15 +79,28 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>pl.put.poznan.buildinginfo.api.BuildingInfoApplication</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-javadoc</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/classes/apidocs</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.directory}/apidocs</directory>
+                                    <includes>
+                                        <include>**/*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -112,14 +116,22 @@
                             <reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>pl.put.poznan.buildinginfo.api.BuildingInfoApplication</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <Javadoc-Path>apidocs</Javadoc-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
