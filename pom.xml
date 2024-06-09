@@ -11,7 +11,7 @@
 
     <groupId>pl.put.poznan</groupId>
     <artifactId>building-info</artifactId>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
 
     <properties>
         <java.version>11</java.version>
@@ -62,8 +62,16 @@
         </dependency>
     </dependencies>
 
-
     <build>
+        <resources>
+            <resource>
+                <directory>${project.build.directory}/apidocs</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <targetPath>docs</targetPath>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -96,10 +104,19 @@
                 <version>3.6.3</version>
                 <executions>
                     <execution>
+                        <id>generate-javadocs</id>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <configuration>
+                            <reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>attach-javadocs</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>javadoc</goal>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
